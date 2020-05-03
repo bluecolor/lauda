@@ -1,0 +1,302 @@
+00:51:13 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping ora2pg_1
+java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:315)
+	at io.blue.repo.Repository$.connect(Repository.scala:16)
+	at io.blue.Lauda.runMapping(Lauda.scala:79)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+00:51:43 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping ora2pg_1
+java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:315)
+	at io.blue.repo.Repository$.connect(Repository.scala:16)
+	at io.blue.Lauda.runMapping(Lauda.scala:79)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+00:54:53 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping ora2pg_1
+java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:315)
+	at io.blue.repo.Repository$.connect(Repository.scala:16)
+	at io.blue.Lauda.runMapping(Lauda.scala:79)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+00:55:04 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping ora2pg_1
+java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:315)
+	at io.blue.repo.Repository$.connect(Repository.scala:16)
+	at io.blue.Lauda.runMapping(Lauda.scala:79)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+01:02:53 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping ora2pg_1
+java.lang.ClassNotFoundException: oracle.jdbc.driver.OracleDriver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:315)
+	at io.blue.repo.Repository$.connect(Repository.scala:16)
+	at io.blue.Lauda.runMapping(Lauda.scala:79)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+01:17:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+01:17:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_1'
+    
+01:17:00 DEBUG Mapping {io.blue.core.Mapping run} - Source Query: 
+
+      select /*+ parallel(8) */
+        col_1,
+col_2,
+col_3
+      from lauda.source_table_1
+      where
+col_1 = 2
+    
+01:17:00 DEBUG Mapping {io.blue.core.Mapping createTargetTable} - 
+      create table target_table_1 (
+        col_1 NUMERIC ,
+col_2 VARCHAR (10),
+col_3 TIMESTAMP
+      )
+    
+01:17:00 DEBUG Mapping {io.blue.core.Mapping run} - Target Query: 
+
+      insert  into target_table_1 (
+        col_1,col_2,col_3
+      ) values (
+        ?,?,?
+      )
+    
+01:17:00 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...
+01:17:00 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...
+01:17:13 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+01:17:13 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_1'
+    
+01:17:13 DEBUG Mapping {io.blue.core.Mapping run} - Source Query: 
+
+      select /*+ parallel(8) */
+        col_1,
+col_2,
+col_3
+      from lauda.source_table_1
+      where
+col_1 = 2
+    
+01:17:13 DEBUG Mapping {io.blue.core.Mapping createTargetTable} - 
+      create table target_table_1 (
+        col_1 NUMERIC ,
+col_2 VARCHAR (10),
+col_3 TIMESTAMP
+      )
+    
+01:17:13 DEBUG Mapping {io.blue.core.Mapping run} - Target Query: 
+
+      insert  into target_table_1 (
+        col_1,col_2,col_3
+      ) values (
+        ?,?,?
+      )
+    
+01:17:13 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...
+01:17:13 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...
+16:30:11 ERROR Lauda {io.blue.Lauda runMapping} - Failed to run mapping target_2
+java.sql.SQLException: Result set after last row
+	at oracle.jdbc.driver.GeneratedScrollableResultSet.getString(GeneratedScrollableResultSet.java:970)
+	at oracle.jdbc.driver.GeneratedResultSet.getString(GeneratedResultSet.java:1460)
+	at io.blue.repo.Repository$.findMapping(Repository.scala:40)
+	at io.blue.Lauda.runMapping(Lauda.scala:80)
+	at io.blue.Lauda.call(Lauda.scala:41)
+	at io.blue.Lauda.call(Lauda.scala:23)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+16:30:22 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+16:30:22 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+16:30:23 DEBUG Mapping {io.blue.core.Mapping run} - Source Query: 
+
+      select /*+ parallel(16) */
+        owner,
+table_name,
+pct_free,
+last_analyzed
+      from source_table_2
+      where
+owner = 'SYS'
+    
+16:30:23 DEBUG Mapping {io.blue.core.Mapping createTargetTable} - 
+      create table target_table_2 (
+        owner VARCHAR (30),
+table_name VARCHAR (30),
+pct_free NUMERIC ,
+last_analyzed TIMESTAMP
+      )
+    
+16:30:23 DEBUG Mapping {io.blue.core.Mapping run} - Target Query: 
+
+      insert /*+ nologging */ into target_table_2 (
+        owner,table_name,pct_free,last_analyzed
+      ) values (
+        ?,?,?,?
+      )
+    
+16:30:23 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...
+16:30:23 DEBUG Mapping {io.blue.core.Mapping stop} - Cleaning connections ...

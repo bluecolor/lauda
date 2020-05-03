@@ -1,0 +1,34 @@
+connections:
+  - name: postgre_2
+    url: jdbc:postgresql://localhost/lauda
+    username: lauda
+    password: lauda
+    class_name: org.postgresql.Driver
+  - name: postgre_3
+    url: jdbc:postgresql://localhost/lauda
+    username: lauda
+    password: lauda
+    class_name: org.postgresql.Driver
+
+
+mappings:
+  - name: source_table_2
+    source_connection: oracle_1
+    target_connection: postgre_2
+    source_table: source_table_2
+    target_table: target_table_2
+    source_columns: [owner, table_name, pct_free, last_analyzed]
+    target_columns: [owner, table_name, pct_free, last_analyzed]
+    source_hint: /*+ parallel(16) */
+    target_hint: /*+ nologging */
+    filter: owner = 'SYS'
+    batch_size: 10
+    drop_create: false
+
+  - name: table_3
+    source_connection: oracle_1
+    target_connection: postgre_2
+    source_table: source_table_3
+    target_table: target_table_3
+    source_columns: [owner, table_name, last_analyzed]
+    target_columns: [owner, table_name, last_analyzed]

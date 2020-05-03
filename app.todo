@@ -1,0 +1,5 @@
+- [x] Exception handling
+- [ ] Import repo data sanitize - check if column mappings exists
+- [ ] Test connection with `connection.test -c=<connection_name>`
+- [ ] Reverse option load data in reverse mapping
+- [x] Check mapping exists!
