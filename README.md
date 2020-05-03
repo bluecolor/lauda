@@ -127,7 +127,11 @@ Loads data between databases
 
   Delete given connection definition
   ```sh
-  ./lauda.sh connection.delete -m=mapping_name
+  ./lauda.sh connection.delete -m=connection_name
+  ```
+
+  ```sh
+  ./lauda.sh connection.delete -m="Connection name"
   ```
 
 
