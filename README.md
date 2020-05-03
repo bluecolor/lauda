@@ -89,29 +89,46 @@ Loads data between databases
 
   Create repository, using the parameters in `config.yml`
   ```sh
-  ./lauda repository.up
+  ./lauda.sh repository.up
   ```
 
   Reset/drop repository, using the parameters in `config.yml`
   ```sh
-  ./lauda repository.down
+  ./lauda.sh repository.down
   ```
 
   Import mapping and connection definitions. [See example data file](/examples/repository-seed-01.yml).
   ```sh
-  ./lauda repository.import -r=examples/repository-seed.yml
+  ./lauda.sh repository.import -r=examples/repository-seed.yml
   ```
 
   Delete a mapping definition(column mappings also)
   ```sh
-  ./lauda mapping.delete -m=mapping_name
+  ./lauda.sh mapping.delete -m=mapping_name
   ```
   ```sh
-  ./lauda mapping.delete -m="Mapping name"
+  ./lauda.sh mapping.delete -m="Mapping name"
   ```
 
+  Check if mapping with given name already exists
+  ```sh
+  ./lauda.sh mapping.exists -m=mapping_name
+  ```
 
+  Run mapping
+  ```sh
+  ./lauda.sh mapping.run -m=mapping_name
+  ```
 
+  Create target table in mapping. Does not run mapping, only created target.
+  ```sh
+  ./lauda.sh mapping.create -m=mapping_name
+  ```
+
+  Delete given connection definition
+  ```sh
+  ./lauda.sh connection.delete -m=mapping_name
+  ```
 
 
 ### Loading definitions
