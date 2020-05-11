@@ -243,7 +243,7 @@ class Lauda extends Callable[Long] with LazyLogging {
       Repository.disconnect
       mapping match {
         case Some(m) => m.stop
-        case None =>
+        case _ =>
       }
     }
   }
