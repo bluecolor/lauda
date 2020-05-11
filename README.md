@@ -58,14 +58,12 @@ table in repository. Has the following attributes;
 
 ### Command line arguments
 ```
-lauda [-hV] <command> [-c=<connectionName>] [-m=<mappingName>] [-r=<repositoryDataFile>]
+lauda [-hV] <command> [parameter]
 Loads data between databases
 
   <command>                   Command to exeucte
-  -c=<connectionName>         Name of the connection
+  <parameter>                 Parameter for the command
   -h, --help                  Show this help message and exit.
-  -m=<mappingName>            Name of the mapping
-  -r=<repositoryDataFile>     Path to repository data file
   -V, --version               Print version information and exit.
 ```
 
