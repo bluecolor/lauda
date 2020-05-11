@@ -332,3 +332,34 @@ java.sql.SQLException: Result set after last row
 18:13:17 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
 18:13:33 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
 18:13:53 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+20:30:58 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+20:30:58 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+20:31:12 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+20:31:12 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+20:31:12 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+20:31:12 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+20:31:12 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+20:36:50 INFO  Lauda {io.blue.Lauda isMappingExists} - Checking mapping table_2...
+20:36:50 INFO  Lauda {io.blue.Lauda isMappingExists} - Mapping exists
+20:37:01 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+21:10:12 ERROR Lauda {io.blue.Lauda p} - Missing parameter
+21:11:12 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...

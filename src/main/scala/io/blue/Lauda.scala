@@ -21,21 +21,28 @@ import io.blue.config.{Repository => RepositoryConfig}
 )
 class Lauda extends Callable[Long] with LazyLogging {
 
-  @Parameters(index = "0", description = Array(
+  @Parameters(index="0", description=Array(
     "Command to exeucte",
     "See https://github.com/bluecolor/lauda#command-line-arguments"
   ))
   var command: String = _
 
-  @Option(names = Array("-m"), description = Array("Name of the mapping"))
-  var mappingName: String = _
+  @Parameters(index="1..*", arity="0..1", hidden=true, description=Array(
+    "Subcommand as parameter"
+  ))
+  var params: Array[String] = _
 
-  @Option(names = Array("-c"), description = Array("Name of the connection"))
-  var connectionName: String = _
-
-  @Option(names = Array("-r"), description = Array("Path to repository data file"))
-  var repositoryDataFile: String = _
-
+  def p(index: Int): String = {
+    var param: String = ""
+    try {
+      param = params(index)
+    } catch {
+      case e: NullPointerException =>
+        logger.error("Missing parameter")
+        System.exit(1)
+    }
+    param
+  }
 
   override def call: Long = {
     val config = Config.read
@@ -43,29 +50,29 @@ class Lauda extends Callable[Long] with LazyLogging {
 
     command match {
       case "repository.import" =>
-        importRepositoryData(repositoryDataFile, config.repository)
+        importRepositoryData(p(0), config.repository)
       case "repository.up" =>
         repositoryUp(config.repository)
       case "repository.down" =>
         repositoryDown(config.repository)
-      case "repository.print.connections" =>
+      case "print.connections" =>
         printConnections(config.repository)
-      case "repository.print.mappings" =>
+      case "print.mappings" =>
         printMappings(config.repository)
-      case "repository.print.columns" =>
-        printColumnMappings(mappingName, config.repository)
+      case "print.columns" =>
+        printColumnMappings(p(0), config.repository)
       case "mapping.delete" =>
-        deleteMapping(mappingName, config.repository)
+        deleteMapping(p(0), config.repository)
       case "mapping.exists" =>
-        isMappingExists(mappingName, config.repository)
+        isMappingExists(p(0), config.repository)
       case "mapping.run" =>
-        runMapping(mappingName, config)
+        runMapping(p(0), config)
       case "mapping.create" =>
-        createTable(mappingName, config)
+        createTable(p(0), config)
       case "connection.delete" =>
-        deleteConnection(connectionName, config.repository)
+        deleteConnection(p(0), config.repository)
       case "connection.test" =>
-        testConnection(connectionName, config.repository)
+        testConnection(p(0), config.repository)
       case _ =>
         println("Unknown command")
     }
