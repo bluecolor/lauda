@@ -1,0 +1,334 @@
+17:04:01 INFO  Lauda {io.blue.Lauda importRepositoryData} - Importing to repository ...
+17:05:03 INFO  Lauda {io.blue.Lauda testConnection} - Deleting connection oracle_1...
+17:05:04 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+17:05:04 INFO  Lauda {io.blue.Lauda testConnection} - Success
+17:05:48 INFO  Lauda {io.blue.Lauda importRepositoryData} - Importing to repository ...
+17:05:55 INFO  Lauda {io.blue.Lauda testConnection} - Deleting connection oracle_2...
+17:05:55 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_2'
+    
+17:05:55 WARN  Repository$ {io.blue.repo.Repository$ testConnection} - Failed to connect to oracle_2
+java.sql.SQLException: ORA-01017: invalid username/password; logon denied
+
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:450)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:392)
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:385)
+	at oracle.jdbc.driver.T4CTTIfun.processError(T4CTTIfun.java:1018)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.processError(T4CTTIoauthenticate.java:501)
+	at oracle.jdbc.driver.T4CTTIfun.receive(T4CTTIfun.java:522)
+	at oracle.jdbc.driver.T4CTTIfun.doRPC(T4CTTIfun.java:257)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:437)
+	at oracle.jdbc.driver.T4CTTIoauthenticate.doOAUTH(T4CTTIoauthenticate.java:954)
+	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:639)
+	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:666)
+	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:32)
+	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:566)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:677)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:228)
+	at io.blue.repo.Connection.connect(Connection.scala:20)
+	at io.blue.repo.Repository$.$anonfun$testConnection$1(Repository.scala:41)
+	at scala.util.Try$.apply(Try.scala:210)
+	at io.blue.repo.Repository$.testConnection(Repository.scala:41)
+	at io.blue.Lauda.testConnection(Lauda.scala:158)
+	at io.blue.Lauda.call(Lauda.scala:59)
+	at io.blue.Lauda.call(Lauda.scala:22)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sbt.Run.invokeMain(Run.scala:109)
+	at sbt.Run.execute$1(Run.scala:79)
+	at sbt.Run.$anonfun$runWithLoader$4(Run.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.util.InterfaceUtil$$anon$1.get(InterfaceUtil.scala:10)
+	at sbt.TrapExit$App.run(TrapExit.scala:257)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+17:05:55 INFO  Lauda {io.blue.Lauda testConnection} - Error
+17:33:50 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:33:50 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select url, username, password, class_name
+      from connections
+    
+17:33:50 ERROR Lauda {io.blue.Lauda printConnections} - Failed to print connections!
+java.sql.SQLException: Invalid column name
+	at oracle.jdbc.driver.OracleStatement.getColumnIndex(OracleStatement.java:4146)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.findColumn(InsensitiveScrollableResultSet.java:300)
+	at oracle.jdbc.driver.GeneratedResultSet.getString(GeneratedResultSet.java:1460)
+	at io.blue.repo.Repository$.findAllConnections(Repository.scala:196)
+	at io.blue.repo.Repository$.printConnections(Repository.scala:43)
+	at io.blue.Lauda.printConnections(Lauda.scala:101)
+	at io.blue.Lauda.call(Lauda.scala:49)
+	at io.blue.Lauda.call(Lauda.scala:22)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sbt.Run.invokeMain(Run.scala:109)
+	at sbt.Run.execute$1(Run.scala:79)
+	at sbt.Run.$anonfun$runWithLoader$4(Run.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.util.InterfaceUtil$$anon$1.get(InterfaceUtil.scala:10)
+	at sbt.TrapExit$App.run(TrapExit.scala:257)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+17:35:22 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:35:22 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:36:51 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:36:51 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:38:13 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:38:13 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:38:39 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:38:39 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:39:32 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:39:32 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:39:51 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:39:52 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:45:50 INFO  Lauda {io.blue.Lauda printConnections} - Printing connections ...
+17:45:50 DEBUG Repository$ {io.blue.repo.Repository$ findAllConnections} - 
+      select name, url, username, password, class_name
+      from connections
+    
+17:55:41 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+17:55:41 ERROR Lauda {io.blue.Lauda printMappings} - Failed to print mappings!
+java.sql.SQLException: Invalid column name
+	at oracle.jdbc.driver.OracleStatement.getColumnIndex(OracleStatement.java:4146)
+	at oracle.jdbc.driver.InsensitiveScrollableResultSet.findColumn(InsensitiveScrollableResultSet.java:300)
+	at oracle.jdbc.driver.GeneratedResultSet.getString(GeneratedResultSet.java:1460)
+	at io.blue.repo.Repository$.findAllMappings(Repository.scala:159)
+	at io.blue.repo.Repository$.printMappings(Repository.scala:53)
+	at io.blue.Lauda.printMappings(Lauda.scala:117)
+	at io.blue.Lauda.call(Lauda.scala:51)
+	at io.blue.Lauda.call(Lauda.scala:22)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sbt.Run.invokeMain(Run.scala:109)
+	at sbt.Run.execute$1(Run.scala:79)
+	at sbt.Run.$anonfun$runWithLoader$4(Run.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.util.InterfaceUtil$$anon$1.get(InterfaceUtil.scala:10)
+	at sbt.TrapExit$App.run(TrapExit.scala:257)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+17:56:10 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+17:56:10 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+17:56:10 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+17:56:10 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+17:56:10 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+17:56:10 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'null'
+    
+17:56:10 ERROR Lauda {io.blue.Lauda printMappings} - Failed to print mappings!
+java.sql.SQLException: Result set after last row
+	at oracle.jdbc.driver.GeneratedScrollableResultSet.getString(GeneratedScrollableResultSet.java:970)
+	at oracle.jdbc.driver.GeneratedResultSet.getString(GeneratedResultSet.java:1460)
+	at io.blue.repo.Repository$.findConnection(Repository.scala:187)
+	at io.blue.repo.Repository$.findAllMappings(Repository.scala:169)
+	at io.blue.repo.Repository$.printMappings(Repository.scala:53)
+	at io.blue.Lauda.printMappings(Lauda.scala:117)
+	at io.blue.Lauda.call(Lauda.scala:51)
+	at io.blue.Lauda.call(Lauda.scala:22)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sbt.Run.invokeMain(Run.scala:109)
+	at sbt.Run.execute$1(Run.scala:79)
+	at sbt.Run.$anonfun$runWithLoader$4(Run.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.util.InterfaceUtil$$anon$1.get(InterfaceUtil.scala:10)
+	at sbt.TrapExit$App.run(TrapExit.scala:257)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+17:58:31 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+17:58:31 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+17:58:31 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+17:58:31 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+17:58:31 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+18:02:00 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+18:02:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+18:02:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+18:02:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+18:02:00 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+18:02:47 INFO  Lauda {io.blue.Lauda printMappings} - Printing mappings ...
+18:02:47 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+18:02:47 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+18:02:47 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+18:02:47 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'postgre_2'
+    
+18:11:32 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+18:12:54 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+18:13:17 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+18:13:33 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+18:13:53 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...

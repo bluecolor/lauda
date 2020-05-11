@@ -11,6 +11,16 @@ connections:
     username: lauda
     password: lauda
     class_name: org.postgresql.Driver
+  - name: oracle_1
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: lauda
+    password: lauda
+    class_name: oracle.jdbc.driver.OracleDriver
+  - name: oracle_2
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: laudax
+    password: lauda
+    class_name: oracle.jdbc.driver.OracleDriver
 
 
 # Required. You can skip optional fields. See [name=table_4] for only adding columns.
@@ -33,11 +43,11 @@ mappings:
     target_connection: postgre_2
     source_table: source_table_3
     target_table: target_table_3
-    source_columns: [owner, table_name, last_analyzed]
-    target_columns: [owner, table_name, last_analyzed]
+    source_columns: [owner, table_name]
+    target_columns: [owner, table_name]
 
-    # this will add given columns only
-  - name: table_4
-    source_columns: [owner, table_name, last_analyzed]
-    target_columns: [owner, table_name, last_analyzed]
+    # this will add given columns only, mapping should exists already
+  - name: table_3
+    source_columns: [last_analyzed]
+    target_columns: [last_analyzed]
 

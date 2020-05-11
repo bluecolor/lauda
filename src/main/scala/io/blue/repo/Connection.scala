@@ -1,4 +1,4 @@
-package io.blue.core
+package io.blue.repo
 
 import collection.JavaConverters._
 import java.sql.DriverManager

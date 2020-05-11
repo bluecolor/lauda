@@ -74,11 +74,15 @@ Loads data between databases
   - `repository.up`: Initialize repository. Uses `config.yml`
   - `repository.down`: Drops the repsitory. Uses `config.yml`
   - `repository.import`: Import repository data with parameter `-r`
+  - `repository.print.connections`: Print connections
+  - `repository.print.mappings`: Print mappings
+  - `repository.print.columns`: Print source and target columns of given mapping with `-m`
   - `mapping.delete`: Delete a mapping by name with parameter `-m`
   - `mapping.exists`: Check if mapping exists with parameter `-m`
   - `mapping.run`: Run the mapping given with `-m`
   - `mapping.create`: Create target table in given mapping with `-m`
   - `connection.delete`: Delete connection by name `-c`
+  - `connection.test`: Test jdbc connection by name `-c`
 
 **Parameters**:
   - `-m`: Mapping name. Example `-m=mapping_name` or if you have spaces, `-m="mapping name`"
@@ -100,6 +104,21 @@ Loads data between databases
   Import mapping and connection definitions. [See example data file](/examples/repository-seed-01.yml).
   ```sh
   ./lauda.sh repository.import -r=examples/repository-seed.yml
+  ```
+
+  Print available connections
+  ```sh
+  ./lauda.sh repository.print.connections
+  ```
+
+  Print defined mappings
+  ```sh
+  ./lauda.sh repository.print.mappings
+  ```
+
+  Print the source and target columns of the given mapping
+  ```sh
+  ./lauda.sh repository.print.columns -m=mapping_name
   ```
 
   Delete a mapping definition(column mappings also)
@@ -127,12 +146,19 @@ Loads data between databases
 
   Delete given connection definition
   ```sh
-  ./lauda.sh connection.delete -m=connection_name
+  ./lauda.sh connection.delete -c=connection_name
   ```
 
   ```sh
-  ./lauda.sh connection.delete -m="Connection name"
+  ./lauda.sh connection.delete -c="Connection name"
   ```
+
+  Test the connection
+  ```sh
+  ./lauda.sh connection.test -c=connection_name
+  ```
+
+
 
 
 ### Loading definitions

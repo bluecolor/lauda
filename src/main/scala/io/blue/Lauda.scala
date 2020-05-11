@@ -9,9 +9,7 @@ import java.util.concurrent.Callable
 import me.tongfei.progressbar._
 
 import io.blue.config.Config
-import io.blue.repo.Repository
-import io.blue.repo.Metadata
-import io.blue.core.Mapping
+import io.blue.repo.{Repository, Metadata, Mapping}
 import com.typesafe.scalalogging.LazyLogging
 import io.blue.config.{Repository => RepositoryConfig}
 
@@ -19,11 +17,14 @@ import io.blue.config.{Repository => RepositoryConfig}
   name = "lauda",
   mixinStandardHelpOptions = true,
   version = Array("lauda 0.1"),
-  description = Array("Loads data between databases")
+  description = Array("Loads data between databases https://github.com/bluecolor/lauda")
 )
 class Lauda extends Callable[Long] with LazyLogging {
 
-  @Parameters(index = "0", description = Array("Command to exeucte"))
+  @Parameters(index = "0", description = Array(
+    "Command to exeucte",
+    "See https://github.com/bluecolor/lauda#command-line-arguments"
+  ))
   var command: String = _
 
   @Option(names = Array("-m"), description = Array("Name of the mapping"))
@@ -47,6 +48,12 @@ class Lauda extends Callable[Long] with LazyLogging {
         repositoryUp(config.repository)
       case "repository.down" =>
         repositoryDown(config.repository)
+      case "repository.print.connections" =>
+        printConnections(config.repository)
+      case "repository.print.mappings" =>
+        printMappings(config.repository)
+      case "repository.print.columns" =>
+        printColumnMappings(mappingName, config.repository)
       case "mapping.delete" =>
         deleteMapping(mappingName, config.repository)
       case "mapping.exists" =>
@@ -57,6 +64,8 @@ class Lauda extends Callable[Long] with LazyLogging {
         createTable(mappingName, config)
       case "connection.delete" =>
         deleteConnection(connectionName, config.repository)
+      case "connection.test" =>
+        testConnection(connectionName, config.repository)
       case _ =>
         println("Unknown command")
     }
@@ -85,7 +94,49 @@ class Lauda extends Callable[Long] with LazyLogging {
       Repository.dropRepository
     } catch {
       case e: Exception =>
-        logger.error("Failed to drop repository", e)
+        logger.error("Failed to drop repository!", e)
+    } finally {
+      Repository.rollback
+      Repository.disconnect
+    }
+  }
+
+  private def printConnections(config: RepositoryConfig) {
+    logger.info("Printing connections ...")
+    try {
+      Repository.connect(config)
+      Repository.printConnections
+    } catch {
+      case e: Exception =>
+        logger.error("Failed to print connections!", e)
+    } finally {
+      Repository.rollback
+      Repository.disconnect
+    }
+  }
+
+  private def printMappings(config: RepositoryConfig) {
+    logger.info("Printing mappings ...")
+    try {
+      Repository.connect(config)
+      Repository.printMappings
+    } catch {
+      case e: Exception =>
+        logger.error("Failed to print mappings!", e)
+    } finally {
+      Repository.rollback
+      Repository.disconnect
+    }
+  }
+
+  private def printColumnMappings(mapping: String, config: RepositoryConfig) {
+    logger.info("Printing column mappings ...")
+    try {
+      Repository.connect(config)
+      Repository.printColumnMappings(mapping)
+    } catch {
+      case e: Exception =>
+        logger.error("Failed to print column mappings!", e)
     } finally {
       Repository.rollback
       Repository.disconnect
@@ -147,6 +198,22 @@ class Lauda extends Callable[Long] with LazyLogging {
         logger.error(s"Failed to delete connection ${name}", e)
     } finally {
       Repository.rollback
+      Repository.disconnect
+    }
+  }
+
+  private def testConnection(name: String, config: RepositoryConfig) {
+    logger.info(s"Deleting connection ${name}...")
+    try {
+      Repository.connect(config)
+      Repository.testConnection(name) match {
+        case true => logger.info("Success")
+        case _ => logger.info("Error")
+      }
+    } catch {
+      case e: Exception =>
+        logger.error(s"Failed to test connection ${name}", e)
+    } finally {
       Repository.disconnect
     }
   }

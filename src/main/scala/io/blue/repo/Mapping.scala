@@ -1,4 +1,4 @@
-package io.blue.core
+package io.blue.repo
 
 import java.sql.{ResultSet, ResultSetMetaData, JDBCType, Connection=>SqlConnection}
 import io.blue.repo.Metadata

@@ -1,12 +1,11 @@
 package io.blue.repo
 
+import scala.util.{Try,Success,Failure}
 import collection.JavaConverters._
 import java.util.HashMap
 import java.io.File
 import java.sql.DriverManager
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import io.blue.core.Mapping
-import io.blue.core.Connection
 import com.typesafe.scalalogging.LazyLogging
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
@@ -14,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import cats.kernel.Hash
 import io.blue.repo.data.{ RepositoryData, Connection => ConnectionData, Mapping => MappingData}
-
+import io.blue.helpers.Tabulator
 
 object Repository extends LazyLogging {
 
@@ -37,6 +36,41 @@ object Repository extends LazyLogging {
 
   def commit { conn.commit }
   def rollback { if (conn != null) conn.rollback }
+
+
+  def printConnections {
+    println(Tabulator.formatTable(
+      List("Name", "Url", "Username", "Password")::
+      findAllConnections.map {c =>
+        List(c.name, c.url, c.username, c.password)
+      }
+    ))
+  }
+
+  def printMappings {
+    println(Tabulator.formatTable(
+      List("Name", "SourceConnection", "TargetConnection", "SourceTable", "TargetTable")::
+      findAllMappings.map{ m =>
+        List(m.name, m.sourceConnection.name, m.targetConnection.name, m.sourceTable, m.targetTable)
+      }
+    ))
+  }
+
+  def printColumnMappings(mapping: String) {
+    println(Tabulator.formatTable(
+      List("Source", "Target")::
+      findColumnMappings(mapping).map{ cm =>
+        List(cm._1, cm._2)
+      }
+    ))
+  }
+
+  def testConnection(name: String): Boolean = {
+    Try (findConnection(name).connect) match {
+      case Success(conn) => conn.close; true
+      case Failure(e) => logger.warn(s"Failed to connect to ${name}", e); false
+    }
+  }
 
   def deleteConnection(name: String) {
     val sql = s"delete from connections where name = '${name}'"
@@ -84,7 +118,7 @@ object Repository extends LazyLogging {
   }
 
 
-  def findMapping(name: String): Option[io.blue.core.Mapping] = {
+  def findMapping(name: String): Option[io.blue.repo.Mapping] = {
 
     if (!isMappingExists(name)) {
       return None
@@ -122,7 +156,7 @@ object Repository extends LazyLogging {
   def findAllMappings = {
     var query = s"""
       select
-        source_connection, target_connection,
+        name, source_connection, target_connection,
         source_table, target_table, source_hint, target_hint, filter,
         batch_size, drop_create
       from mappings
@@ -144,11 +178,13 @@ object Repository extends LazyLogging {
       mapping.sourceConnection = findConnection(sourceConnection)
       mapping.targetConnection = findConnection(targetConnection)
       mapping.columnMappings = findColumnMappings(mapping.name)
+      mappings ::= mapping
     }
-    mappings
+    rs.close
+    mappings.sortBy(_.name)
   }
 
-  def findConnection(name: String): io.blue.core.Connection = {
+  def findConnection(name: String): io.blue.repo.Connection = {
     var query = s"""
       select url, username, password, class_name
       from connections
@@ -169,7 +205,7 @@ object Repository extends LazyLogging {
 
   def findAllConnections = {
     var query = s"""
-      select url, username, password, class_name
+      select name, url, username, password, class_name
       from connections
     """
     logger.debug(query)
@@ -185,7 +221,7 @@ object Repository extends LazyLogging {
       connections ::= connection
     }
     rs.close
-    connections
+    connections.sortBy(_.name)
   }
 
   def findColumnMappings(mapping: String) = {
@@ -200,7 +236,7 @@ object Repository extends LazyLogging {
       columns :+=  (rs.getString("source"), rs.getString("target"))
     }
     rs.close
-    columns
+    columns.sortBy(_._2)
   }
 
   def createRepository {
