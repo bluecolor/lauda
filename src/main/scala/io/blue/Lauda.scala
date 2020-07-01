@@ -21,7 +21,10 @@ import io.blue.config.{Repository => RepositoryConfig}
     "Loads data between databases https://github.com/bluecolor/lauda"
   )
 )
-class Lauda extends Callable[Long] with LazyLogging {
+class Lauda extends Callable[Int] with LazyLogging {
+
+  val SUCCESS = 0
+  val ERROR = 1
 
   @Parameters(
     index = "0",
@@ -69,10 +72,10 @@ class Lauda extends Callable[Long] with LazyLogging {
     param
   }
 
-  override def call: Long = {
+  override def call: Int = {
     val config = Config.read
 
-    command match {
+    val result = command match {
       case "repository.import" =>
         importRepositoryData(p(0), config.repository)
       case "repository.up" =>
@@ -101,17 +104,20 @@ class Lauda extends Callable[Long] with LazyLogging {
         testConnection(p(0), config.repository)
       case _ =>
         println("Unknown command")
+        ERROR
     }
 
-    return 0
+    return result
   }
 
-  private def repositoryUp(config: RepositoryConfig) {
+  private def repositoryUp(config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Creating repository ...")
     try {
       Repository.connect(config)
       Repository.createRepository
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error("Failed to create repository", e)
@@ -119,14 +125,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def repositoryDown(config: RepositoryConfig) {
+  private def repositoryDown(config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Dropping repository ...")
     try {
       Repository.connect(config)
       Repository.dropRepository
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error("Failed to drop repository!", e)
@@ -134,14 +143,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def printConnections(config: RepositoryConfig) {
+  private def printConnections(config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Printing connections ...")
     try {
       Repository.connect(config)
       Repository.printConnections
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error("Failed to print connections!", e)
@@ -149,14 +161,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def printMappings(config: RepositoryConfig) {
+  private def printMappings(config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Printing mappings ...")
     try {
       Repository.connect(config)
       Repository.printMappings
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error("Failed to print mappings!", e)
@@ -164,14 +179,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def printColumnMappings(mapping: String, config: RepositoryConfig) {
+  private def printColumnMappings(mapping: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Printing column mappings ...")
     try {
       Repository.connect(config)
       Repository.printColumnMappings(mapping)
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error("Failed to print column mappings!", e)
@@ -179,14 +197,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def importRepositoryData(path: String, config: RepositoryConfig) {
+  private def importRepositoryData(path: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info("Importing to repository ...")
     try {
       Repository.connect(config)
       Repository.importRepositoryData(path)
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to import repository data ${path}", e)
@@ -194,6 +215,7 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
   private def generateMapping(
@@ -204,11 +226,13 @@ class Lauda extends Callable[Long] with LazyLogging {
     targetConnection: String,
     columns: String,
     config: RepositoryConfig
-  ) {
+  ) = {
+    var result = ERROR
     try {
       Repository.connect(config)
       Repository.generateMapping(name, sourceTable, targetTable, sourceConnection, targetConnection, columns)
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to generate mapping for ${name}", e)
@@ -216,14 +240,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def deleteMapping(name: String, config: RepositoryConfig) {
+  private def deleteMapping(name: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info(s"Deleting mapping ${name}...")
     try {
       Repository.connect(config)
       Repository.deleteMapping(name)
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to delete mapping ${name}", e)
@@ -231,9 +258,11 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def isMappingExists(name: String, config: RepositoryConfig) {
+  private def isMappingExists(name: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info(s"Checking mapping ${name}...")
     try {
       Repository.connect(config)
@@ -242,6 +271,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         case _    => logger.info(s"Mapping does NOT exist")
       }
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to delete mapping ${name}", e)
@@ -249,14 +279,17 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def deleteConnection(name: String, config: RepositoryConfig) {
+  private def deleteConnection(name: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info(s"Deleting connection ${name}...")
     try {
       Repository.connect(config)
       Repository.deleteConnection(name)
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to delete connection ${name}", e)
@@ -264,9 +297,11 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def testConnection(name: String, config: RepositoryConfig) {
+  private def testConnection(name: String, config: RepositoryConfig) = {
+    var result = ERROR
     logger.info(s"Deleting connection ${name}...")
     try {
       Repository.connect(config)
@@ -275,6 +310,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         case _    => logger.info("Error")
       }
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         logger.error(s"Failed to test connection ${name}", e)
@@ -282,9 +318,11 @@ class Lauda extends Callable[Long] with LazyLogging {
     } finally {
       Repository.disconnect
     }
+    result
   }
 
-  private def createTable(mappingName: String, config: Config) {
+  private def createTable(mappingName: String, config: Config) = {
+    var result = ERROR
     var mapping: scala.Option[Mapping] = None
 
     try {
@@ -295,6 +333,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         case None    => println(s"Mapping not found ${mapping}")
       }
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         mapping match {
@@ -310,9 +349,11 @@ class Lauda extends Callable[Long] with LazyLogging {
         case _       =>
       }
     }
+    result
   }
 
-  private def runMapping(name: String, config: Config) {
+  private def runMapping(name: String, config: Config) = {
+    var result = ERROR
     var mapping: scala.Option[Mapping] = None
 
     try {
@@ -323,6 +364,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         case None    => println(s"Mapping not found ${name}")
       }
       Repository.commit
+      result = SUCCESS
     } catch {
       case e: Exception =>
         mapping match {
@@ -331,6 +373,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         }
         logger.error(s"Failed to run mapping ${name}", e)
         Repository.rollback
+        System.exit(1)
     } finally {
       Repository.disconnect
       mapping match {
@@ -338,6 +381,7 @@ class Lauda extends Callable[Long] with LazyLogging {
         case None    =>
       }
     }
+    result
   }
 
 }
