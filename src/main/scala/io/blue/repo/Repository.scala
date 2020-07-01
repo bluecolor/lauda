@@ -330,24 +330,18 @@ object Repository extends LazyLogging {
   private def findColumns(connection: String, table: String): List[String] = {
     var conn = findConnection(connection).connect
     try {
-      val schemaTable = table.split(".")
-      val rs = if (schemaTable.length > 1) {
-        conn.getMetaData.getColumns(null, schemaTable(0), schemaTable(1), null)
-      } else {
-        conn.getMetaData.getColumns(null, null, table, null)
-      }
-      var columns: List[String] = List()
-      while (rs.next) {
-        columns :+= rs.getString("COLUMN_NAME")
-      }
+      val sql = s"select * from ${table}"
+      val rsmd = conn.createStatement.executeQuery(sql).getMetaData
+      val columns = 1.to(rsmd.getColumnCount).map{ i =>
+        rsmd.getColumnName(i)
+      }.toList
+      conn.close
       columns
     } catch {
       case e: Exception =>
         conn.close
         logger.error(s"Failed to get columns from ${table}@${connection}")
         throw e
-    } finally {
-      conn.close
     }
   }
 
@@ -359,6 +353,7 @@ object Repository extends LazyLogging {
     targetConnection: String,
     columns: String = ""
   ) {
+    logger.info(f"Generating mapping ${name} ...")
     var md = new MappingData
     md.name = name
     md.sourceTable = sourceTable
@@ -373,5 +368,6 @@ object Repository extends LazyLogging {
     md.sourceColumns = _columns.asJava
     md.targetColumns = _columns.asJava
     importMappings(List(md))
+    logger.info("Success. Mapping generated.")
   }
 }

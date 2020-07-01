@@ -47,12 +47,14 @@ class Vendor extends LazyLogging{
       if (elements.length == 1) {
         elements ::= precision.toString
       }
-      if (elements(0) == "_") { elements.patch(0, List(typeName), 1) }
-      if (elements(1) == "_") { elements.patch(1, List(precision.toString), 1) }
+      if (elements(0) == "_") { elements = elements.patch(0, List(typeName), 1) }
+      if (elements(1) == "_") { elements = elements.patch(1, List(precision.toString), 1) }
 
       return s"${elements(0)} ${if (elements(1).toInt > 0) "("+elements(1)+")" else ""}"
     } catch {
-      case e: Exception => return default
+      case e: Exception =>
+        logger.debug(s"Unable to convert column type: ${typeName.toLowerCase}")
+        return default
     }
 
     return default
