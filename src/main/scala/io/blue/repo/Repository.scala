@@ -1,5 +1,6 @@
 package io.blue.repo
 
+import scala.collection.JavaConverters._
 import scala.util.{Try,Success,Failure}
 import collection.JavaConverters._
 import java.util.HashMap
@@ -325,4 +326,52 @@ object Repository extends LazyLogging {
     stmt.executeBatch
   }
 
+
+  private def findColumns(connection: String, table: String): List[String] = {
+    var conn = findConnection(connection).connect
+    try {
+      val schemaTable = table.split(".")
+      val rs = if (schemaTable.length > 1) {
+        conn.getMetaData.getColumns(null, schemaTable(0), schemaTable(1), null)
+      } else {
+        conn.getMetaData.getColumns(null, null, table, null)
+      }
+      var columns: List[String] = List()
+      while (rs.next) {
+        columns :+= rs.getString("COLUMN_NAME")
+      }
+      columns
+    } catch {
+      case e: Exception =>
+        conn.close
+        logger.error(s"Failed to get columns from ${table}@${connection}")
+        throw e
+    } finally {
+      conn.close
+    }
+  }
+
+  def generateMapping(
+    name: String,
+    sourceTable: String,
+    targetTable: String,
+    sourceConnection: String,
+    targetConnection: String,
+    columns: String = ""
+  ) {
+    var md = new MappingData
+    md.name = name
+    md.sourceTable = sourceTable
+    md.targetTable = targetTable
+    md.sourceConnection = sourceConnection
+    md.targetConnection = targetConnection
+    var _columns = if (columns == null || columns == "") {
+      findColumns(sourceConnection, sourceTable)
+    } else {
+      columns.split(",").toList
+    }
+    md.sourceColumns = _columns.asJava
+    md.targetColumns = _columns.asJava
+    importMappings(List(md))
+  }
 }

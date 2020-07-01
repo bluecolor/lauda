@@ -58,34 +58,44 @@ table in repository. Has the following attributes;
 
 ### Command line arguments
 ```
-lauda [-hV] <command> [parameter]
-Loads data between databases
-
-  <command>                   Command to exeucte
-  <parameter>                 Parameter for the command
-  -h, --help                  Show this help message and exit.
-  -V, --version               Print version information and exit.
+Usage: lauda [-hV] [--columns=<columns>]
+             [--source-connection=<sourceConnection>]
+             [--source-table=<sourceTable>]
+             [--target-connection=<targetConnection>]
+             [--target-table=<targetTable>] <command>
+Loads data between databases https://github.com/bluecolor/lauda
+      <command>             Command to exeucte
+                            See https://github.
+                              com/bluecolor/lauda#command-line-arguments
+      --columns=<columns>   Comma seperated list of columns. Optional
+  -h, --help                Show this help message and exit.
+      --source-connection=<sourceConnection>
+                            Source connection name
+      --source-table=<sourceTable>
+                            Source table name. can be schema.table_name or just
+                              table_name
+      --target-connection=<targetConnection>
+                            Target connection name
+      --target-table=<targetTable>
+                            Target table name. can be schema.table_name or just
+                              table_name
+  -V, --version             Print version information and exit.
 ```
 
 `command` command can be one of the following and can take parameters;
 
   - `repository.up`: Initialize repository. Uses `config.yml`
   - `repository.down`: Drops the repsitory. Uses `config.yml`
-  - `repository.import`: Import repository data with parameter `-r`
+  - `repository.import`: Import repository data with parameter
   - `repository.print.connections`: Print connections
   - `repository.print.mappings`: Print mappings
-  - `repository.print.columns`: Print source and target columns of given mapping with `-m`
-  - `mapping.delete`: Delete a mapping by name with parameter `-m`
-  - `mapping.exists`: Check if mapping exists with parameter `-m`
-  - `mapping.run`: Run the mapping given with `-m`
-  - `mapping.create`: Create target table in given mapping with `-m`
-  - `connection.delete`: Delete connection by name `-c`
-  - `connection.test`: Test jdbc connection by name `-c`
-
-**Parameters**:
-  - `-m`: Mapping name. Example `-m=mapping_name` or if you have spaces, `-m="mapping name`"
-  - `-c`: Connection name. Example `-c=connection_name` or if you have spaces, `-c="connection name`"
-  - `-r`: Path to repository data file. Example `-r=./data/import.01.yml`
+  - `repository.print.columns`: Print source and target columns of given mapping with
+  - `mapping.delete`: Delete a mapping by name with parameter
+  - `mapping.exists`: Check if mapping exists with parameter
+  - `mapping.run`: Run the mapping given with
+  - `mapping.create`: Create target table in given mapping with
+  - `connection.delete`: Delete connection by name
+  - `connection.test`: Test jdbc connection by name
 
 **Examples**
 
@@ -101,7 +111,7 @@ Loads data between databases
 
   Import mapping and connection definitions. [See example data file](/examples/repository-seed-01.yml).
   ```sh
-  ./lauda.sh repository.import -r=examples/repository-seed.yml
+  ./lauda.sh repository.import examples/repository-seed.yml
   ```
 
   Print available connections
@@ -116,58 +126,66 @@ Loads data between databases
 
   Print the source and target columns of the given mapping
   ```sh
-  ./lauda.sh repository.print.columns -m=mapping_name
+  ./lauda.sh repository.print.columns mapping_name
   ```
 
   Delete a mapping definition(column mappings also)
   ```sh
-  ./lauda.sh mapping.delete -m=mapping_name
+  ./lauda.sh mapping.delete mapping_name
   ```
   ```sh
-  ./lauda.sh mapping.delete -m="Mapping name"
+  ./lauda.sh mapping.delete "Mapping name"
   ```
 
   Check if mapping with given name already exists
   ```sh
-  ./lauda.sh mapping.exists -m=mapping_name
+  ./lauda.sh mapping.exists mapping_name
   ```
 
   Run mapping
   ```sh
-  ./lauda.sh mapping.run -m=mapping_name
+  ./lauda.sh mapping.run mapping_name
   ```
 
   Create target table in mapping. Does not run mapping, only created target.
   ```sh
-  ./lauda.sh mapping.create -m=mapping_name
+  ./lauda.sh mapping.create mapping_name
   ```
 
   Delete given connection definition
   ```sh
-  ./lauda.sh connection.delete -c=connection_name
+  ./lauda.sh connection.delete connection_name
   ```
 
   ```sh
-  ./lauda.sh connection.delete -c="Connection name"
+  ./lauda.sh connection.delete "Connection name"
   ```
 
   Test the connection
   ```sh
-  ./lauda.sh connection.test -c=connection_name
+  ./lauda.sh connection.test connection_name
   ```
 
+  Generate mapping
+  ```sh
+    ./lauda.sh mapping.generate table_4 \
+      --source-connection oracle_1 \
+      --target-connection postgre_2 \
+      --source-table source_table_3 \
+      --target-table target_table_3
+  ```
 
 
 
 ### Loading definitions
   An ETL definiton can be given directly using a database client in repository or using
   command line option. With a database client you can execute a script like [this one](/examples/repository-seed-01.sql)
-  For command line, use the `repsitory.import` command and `-r` option to give data file like
+  For command line, use the `repsitory.import` command and give data file like
   [this one](/examples/repository-seed-01.yml). See [examples](/examples) for different options.
 
   Example command line usage;
-  `./lauda.sh repository.import -r=/path/to/data-file.yml`
-  `./lauda.sh repository.import -r=./data-file.yml`
+  `./lauda.sh repository.import /path/to/data-file.yml`
+  `./lauda.sh repository.import ./data-file.yml`
 
 
 

@@ -1,7 +1,7 @@
 package io.blue.repo
 
 import java.sql.{ResultSet, ResultSetMetaData, JDBCType, Connection=>SqlConnection}
-import io.blue.repo.Metadata
+import io.blue.config.Config
 import com.typesafe.scalalogging.LazyLogging
 import me.tongfei.progressbar._
 
@@ -118,11 +118,11 @@ class Mapping extends LazyLogging {
 
   private def createTargetTable(rsmd: ResultSetMetaData) {
     val columns= columnMappings.map(_._2)
-    val vendor = Metadata.findVendorByUrl(targetConnection.url)
+    val vendor = Config.instance.findVendorByUrl(targetConnection.url)
     val colums = 1.to(rsmd.getColumnCount).map { i =>
       var columnJdbcTypeName = JDBCType.valueOf(rsmd.getColumnType(i)).toString
-      s"${Metadata.getColumnExpression(vendor, columns(i-1), columnJdbcTypeName, rsmd.getPrecision(i))}"
-    }.mkString(",\n").dropRight(1)
+      s"${Config.instance.columnTypetoVendor(vendor, columns(i-1), columnJdbcTypeName, rsmd.getPrecision(i))}"
+    }.mkString(",\n")
 
     var sql = s"""
       create table ${targetTable} (
@@ -153,6 +153,5 @@ class Mapping extends LazyLogging {
     targetConn.prepareStatement(sql).executeUpdate
     targetConn.commit
   }
-
 
 }

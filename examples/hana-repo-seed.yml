@@ -1,0 +1,26 @@
+
+# optional. If you have already defined connection. you can comment it.
+connections:
+  - name: dwh
+    url: jdbc:oracle:thin:@192.168.10.60:1521/admdwh
+    username: lauda
+    password: lauda
+    class_name: oracle.jdbc.driver.OracleDriver
+  - name: hana
+    url: jdbc:sap://192.168.69.102:30041
+    username: PrimeIT
+    password: PrimeIT123*
+    class_name: com.sap.db.jdbc.Driver
+
+
+# Required. You can skip optional fields. See [name=table_4] for only adding columns.
+mappings:
+  - name: BIMC_ALL_CUBES
+    source_connection: hana
+    target_connection: dwh
+    source_table: _SYS_BI.BIMC_ALL_CUBES
+    target_table: hana.BIMC_ALL_CUBES
+    source_columns: [CUBE_ID , CATALOG_NAME, CREATED_ON]
+    target_columns: [CUBE_ID , CATALOG_NAME, CREATED_ON]
+    batch_size: 100
+    drop_create: true

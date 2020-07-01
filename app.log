@@ -363,3 +363,53 @@ java.sql.SQLException: Result set after last row
 20:37:01 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
 21:10:12 ERROR Lauda {io.blue.Lauda p} - Missing parameter
 21:11:12 INFO  Lauda {io.blue.Lauda printColumnMappings} - Printing column mappings ...
+22:46:37 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
+22:46:37 ERROR Lauda {io.blue.Lauda generateMapping} - Failed to generate mapping for table_4
+java.lang.NullPointerException: null
+	at io.blue.repo.Repository$.findConnection(Repository.scala:197)
+	at io.blue.repo.Repository$.findColumns(Repository.scala:331)
+	at io.blue.repo.Repository$.generateMapping(Repository.scala:369)
+	at io.blue.Lauda.generateMapping(Lauda.scala:202)
+	at io.blue.Lauda.call(Lauda.scala:89)
+	at io.blue.Lauda.call(Lauda.scala:24)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:1783)
+	at picocli.CommandLine.access$900(CommandLine.java:145)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2150)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2144)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2108)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:1975)
+	at picocli.CommandLine.execute(CommandLine.java:1904)
+	at Main$.delayedEndpoint$Main$1(Main.scala:8)
+	at Main$delayedInit$body.apply(Main.scala:7)
+	at scala.Function0.apply$mcV$sp(Function0.scala:39)
+	at scala.Function0.apply$mcV$sp$(Function0.scala:39)
+	at scala.runtime.AbstractFunction0.apply$mcV$sp(AbstractFunction0.scala:17)
+	at scala.App.$anonfun$main$1(App.scala:73)
+	at scala.App.$anonfun$main$1$adapted(App.scala:73)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:553)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:551)
+	at scala.collection.AbstractIterable.foreach(Iterable.scala:921)
+	at scala.App.main(App.scala:73)
+	at scala.App.main$(App.scala:71)
+	at Main$.main(Main.scala:7)
+	at Main.main(Main.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at sbt.Run.invokeMain(Run.scala:109)
+	at sbt.Run.execute$1(Run.scala:79)
+	at sbt.Run.$anonfun$runWithLoader$4(Run.scala:92)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.java:23)
+	at sbt.util.InterfaceUtil$$anon$1.get(InterfaceUtil.scala:10)
+	at sbt.TrapExit$App.run(TrapExit.scala:257)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+22:56:48 DEBUG Repository$ {io.blue.repo.Repository$ findConnection} - 
+      select url, username, password, class_name
+      from connections
+      where name = 'oracle_1'
+    
